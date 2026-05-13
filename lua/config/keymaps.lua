@@ -6,9 +6,10 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
 
 -- 终端
-vim.keymap.set("n", "<C-\\>", "<cmd>ToggleTerm<cr>")
-vim.keymap.set("t", "<C-\\>", "<cmd>ToggleTerm<cr>")
+vim.keymap.set("n", "<F2>", "<cmd>ToggleTerm<cr>")
+vim.keymap.set("t", "<F2>", "<cmd>ToggleTerm<cr>")
 vim.keymap.set("n", "<leader>tf", "<cmd>ToggleTerm direction=float<cr>")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 -- md 渲染开关
 vim.keymap.set("n", "<leader>md", "<cmd>RenderMarkdown toggle<cr>")

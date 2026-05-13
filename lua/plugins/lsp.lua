@@ -4,26 +4,40 @@ return {
         config = function()
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-            local servers = { "pyright", "lua_ls" }
-            --      local lspconfig = require("lspconfig")
-            --
-            --      lspconfig.pyright.setup({
-            --          settings = {
-            --              python = {
-            --                  analysis = {
-            --                      typeCheckingMode = "basic"
-            --                  }
-            --              }
-            --          }
-            --      })
+            -- Pyright 配置：自动检测虚拟环境
+            vim.lsp.config("pyright", {
+                capabilities = capabilities,
+                settings = {
+                    python = {
+                        pythonPath = vim.fn.exepath("python3"),
+                        analysis = {
+                            autoSearchPaths = true,
+                            useLibraryCodeForTypes = true,
+                            diagnosticMode = "workspace",
+                            typeCheckingMode = "basic",
+                        },
+                    },
+                },
+            })
+            vim.lsp.enable("pyright")
 
+            -- Lua LSP 配置
+            vim.lsp.config("lua_ls", {
+                capabilities = capabilities,
+            })
+            vim.lsp.enable("lua_ls")
 
-            for _, server in ipairs(servers) do
-                vim.lsp.config(server, {
-                    capabilities = capabilities,
-                })
-                vim.lsp.enable(server)
-            end
+            -- C++ LSP 配置 (clangd)
+            vim.lsp.config("clangd", {
+                capabilities = capabilities,
+                cmd = {
+                    "clangd",
+                    "--background-index",
+                    "--clang-tidy",
+                    "--header-insertion=iwyu",
+                },
+            })
+            vim.lsp.enable("clangd")
         end,
     },
 }

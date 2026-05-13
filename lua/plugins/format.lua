@@ -7,8 +7,19 @@ return {
                 formatters_by_ft = {
                     python = { "ruff_format", "black" },
                     lua = { "stylua" },
+                    c = { "clang_format" },
+                    cpp = { "clang_format" },
                     json = { "jq" },
                     markdown = { "prettier" },
+                },
+
+                formatters = {
+                    clang_format = {
+                        prepend_args = {
+                            "--style",
+                            "{BasedOnStyle: LLVM, IndentWidth: 4, UseTab: Never, ColumnLimit: 120}",
+                        },
+                    },
                 },
 
                 format_on_save = {

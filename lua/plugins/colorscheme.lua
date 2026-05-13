@@ -1,14 +1,49 @@
 return {
     {
-        "folke/tokyonight.nvim",
-        lazy = false,
+        "navarasu/onedark.nvim",
         priority = 1000,
         config = function()
-            vim.cmd.colorscheme("tokyonight")
-            vim.api.nvim_set_hl(0, "Pmenu", { bg = "#bcbcbc", fg = "#c0caf5" })
-            vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#414868", fg = "#ffffff", bold = true })
-            vim.api.nvim_set_hl(0, "PmenuSbar", { bg = "#2a2e3f" })
-            vim.api.nvim_set_hl(0, "PmenuThumb", { bg = "#7aa2f7" })
-        end,
+            require("onedark").setup({
+                style = "dark",
+                transparent = false,
+                term_colors = false,
+                ending_tildes = false,
+
+                code_style = {
+                    comments = "italic",
+                    keywords = "none",
+                    functions = "none",
+                    strings = "none",
+                    variables = "none",
+                },
+
+                colors = {},
+
+                highlights = {
+                    Comment = { fg = "#5c6370", italic = true },
+                    Function = { fg = "#61afef" },
+                    Keyword = { fg = "#c678dd" },
+                    String = { fg = "#98c379" },
+                    Type = { fg = "#e5c07b" },
+                    Constant = { fg = "#d19a66" },
+                    Identifier = { fg = "#e06c75" },
+                }
+            })
+
+            require("onedark").load()
+        end
     },
+    {
+        "itchyny/lightline.vim",
+        lazy = false,
+        init = function()
+            vim.g.lightline = {
+                colorscheme = "onedark",
+                active = {
+                    left = { { "mode", "paste" }, { "readonly", "filename", "modified" } },
+                    right = { { "lineinfo" }, { "percent" }, { "fileformat", "fileencoding", "filetype" } }
+                }
+            }
+        end
+    }
 }
