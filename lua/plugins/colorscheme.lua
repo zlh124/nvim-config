@@ -36,6 +36,7 @@ return {
     {
         "itchyny/lightline.vim",
         lazy = false,
+        dependencies = { "navarasu/onedark.nvim" },
         init = function()
             vim.g.lightline = {
                 colorscheme = "onedark",
