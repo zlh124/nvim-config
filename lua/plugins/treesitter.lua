@@ -4,21 +4,19 @@ return {
         lazy = false,
         build = ":TSUpdate",
         config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "lua",
-                    "python",
-                    "c",
-                    "cpp",
-                    "bash",
-                    "json",
-                    "markdown",
-                    "markdown_inline",
-                    "java",
-                    "yaml",
-                },
-                highlight = { enable = true },
-                indent = { enable = true },
+            require("nvim-treesitter.config").setup({})
+
+            require("nvim-treesitter.install").install({
+                "lua",
+                "python",
+                "c",
+                "cpp",
+                "bash",
+                "json",
+                "markdown",
+                "markdown_inline",
+                "java",
+                "yaml",
             })
         end,
     },
